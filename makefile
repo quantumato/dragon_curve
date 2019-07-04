@@ -1,6 +1,6 @@
-CC = g++
-CFLAGS = -g -O -Wall
-DEPS=dragon_curve.hpp matrix.hpp image.hpp
+CC = gcc
+CFLAGS = -g -O3 -Wall
+DEPS=dragon_curve.h matrix.h image.h
 OBJ = dragon_curve.o image.o
 
 %.o: %.c $(DEPS)
