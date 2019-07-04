@@ -5,6 +5,7 @@
 #include "dragon_curve.h"
 
 typedef unsigned long ulong;
+typedef unsigned char uchar;
 
 //given step, give direction encoding
 int calcStep(ulong step) {
@@ -14,14 +15,14 @@ int calcStep(ulong step) {
     return turnBit > 0;
 }
 
-direction calcDir(direction currDir, int turn) {
+uchar calcDir(uchar currDir, int turn) {
     if(turn == 0) turn = -1;
-    return (unsigned long)((currDir + turn) & 0x3);
+    return (uchar)((currDir + turn) & 0x3);
 }
 
 dragon * makeDragon(int size) {
-    dragon* _dragon = (dragon *)malloc(sizeof(dragon));
-    _dragon->turns = (direction *)malloc(sizeof(direction)*size);
+    dragon* _dragon = (dragon*)malloc(sizeof(dragon));
+    _dragon->turns = (uchar*)malloc(sizeof(uchar)*size);
     return _dragon;
 }
 
@@ -30,6 +31,7 @@ dragon * generateDragon(int iterations) {
     ulong step,it;
     ulong totalstep = 0;
     int turndir;
+    uchar currDir = NORTH;
     
     //calculate total steps
     totalstep = pow(2.0, (double)(iterations));
@@ -39,10 +41,11 @@ dragon * generateDragon(int iterations) {
 
     //start at 1 since we hard code 0 to be a line north
     for(step = 0;step < totalstep;step++) {
+        //do we go left or right
         turndir = calcStep(step);
-
-
-        //curve->turns[step] = calc
+        //translate to cardinal direction
+        currDir = calcDir(currDir, turndir);
+        curve->turns[step] = currDir;
     }
     return curve;
 }
@@ -68,9 +71,10 @@ int main(int argc, char** argv) {
 
     //debug
     printf("iterations: %lu\n", iterations);
-    direction testDir = NORTH;
+    uchar testDir = NORTH;
     printf("direction NORTH: %d\n", testDir);
     printf("test NORTH turn LEFT: %lu\n", calcDir(testDir, 0));
+    printf("size of direction: %d\n", sizeof(NORTH));
 
     dragon * curve = generateDragon(iterations);
     //TODO: really should just do this with an assert
