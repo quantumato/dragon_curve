@@ -29,7 +29,7 @@ dragon * generateDragon(int iterations) {
     totalstep = pow(2.0, (double)(iterations+1))-1;
 
     dragon * curve = makeDragon(totalstep);
-    
+
     //start at 1 for simplicity
     /*for(it = 1; it <= iterations; it++) {
         for(step = 1;step < totalstep;step++) {
