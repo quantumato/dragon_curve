@@ -1,10 +1,15 @@
-#ifndef DRAGON_CURVE_HPP
-#define DRAGON_CURVE_HPP
+#ifndef DRAGON_CURVE_H
+#define DRAGON_CURVE_H
 
-struct matrix {
-    int M;
-    int N;
-    void * data;
-}
+typedef enum direction_encoding {
+    NORTH,
+    EAST,
+    SOUTH,
+    WEST 
+} direction;
+
+typedef struct dragon_curve {
+    direction * turns;
+} dragon;
 
 #endif

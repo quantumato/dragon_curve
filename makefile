@@ -1,12 +1,13 @@
 CC = gcc
 CFLAGS = -g -O3 -Wall
-DEPS=dragon_curve.h matrix.h image.h
-OBJ = dragon_curve.o image.o
+DEPS=dragon_curve.h matrix.h
+OBJ = dragon_curve.o
+LIB = -lm
 
 %.o: %.c $(DEPS)
 	$(CC) -c -o $@ $< $(CFLAGS)
 
 dragon_curve: $(OBJ)
-	$(CC) -o $@ $^ $(CFLAGS)
+	$(CC) -o $@ $^ $(CFLAGS) $(LIB)
 
 
