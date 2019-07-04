@@ -20,9 +20,10 @@ uchar calcDir(uchar currDir, int turn) {
     return (uchar)((currDir + turn) & 0x3);
 }
 
-dragon * makeDragon(int size) {
+dragon * makeDragon(int iterations) {
     dragon* _dragon = (dragon*)malloc(sizeof(dragon));
-    _dragon->turns = (uchar*)malloc(sizeof(uchar)*size);
+    _dragon->totalsteps = pow(2.0, (double)(iterations));
+    _dragon->turns = (uchar*)malloc(sizeof(uchar)*(_dragon->totalsteps));
     return _dragon;
 }
 
@@ -34,10 +35,9 @@ dragon * generateDragon(int iterations) {
     uchar currDir = NORTH;
     
     //calculate total steps
-    totalstep = pow(2.0, (double)(iterations));
 
-    dragon * curve = makeDragon(totalstep);
-    printf("total steps: %d\n", totalstep);
+    dragon * curve = makeDragon(iterations);
+    printf("total steps: %d\n", curve->totalsteps);
 
     //start at 1 since we hard code 0 to be a line north
     for(step = 0;step < totalstep;step++) {
@@ -48,6 +48,9 @@ dragon * generateDragon(int iterations) {
         curve->turns[step] = currDir;
     }
     return curve;
+}
+
+void printCurve(dragon * curve) {
 }
 
 

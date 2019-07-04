@@ -14,6 +14,7 @@
 #define WEST (unsigned char)3
 
 typedef struct dragon_curve {
+    long totalsteps;
     unsigned char* turns;
 } dragon;
 
