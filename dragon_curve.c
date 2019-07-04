@@ -26,9 +26,10 @@ dragon * generateDragon(int iterations) {
     ulong totalstep = 0;
     
     //calculate total steps
-    totalstep = pow(2.0, (double)(iterations+1))-1;
+    totalstep = pow(2.0, (double)(iterations));
 
     dragon * curve = makeDragon(totalstep);
+    printf("total steps: %d\n", totalstep);
 
     //start at 1 for simplicity
     /*for(it = 1; it <= iterations; it++) {
